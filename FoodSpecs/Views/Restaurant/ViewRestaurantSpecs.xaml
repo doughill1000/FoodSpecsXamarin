@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+		xmlns:c="clr-namespace:FoodSpecs.PCL"
+		x:Class="FoodSpecs.ViewRestaurantSpecs">
+	<ContentPage.ToolbarItems>
+	  	<ToolbarItem Name="Add" Clicked="AddFoodSpec" Icon="add.png"></ToolbarItem>
+	 </ContentPage.ToolbarItems>
+	<ActivityIndicator x:Name="Loading" Color="Black" IsVisible="true" IsRunning="true"/>
+	<StackLayout x:Name="SpecsPanel" IsVisible="false">
+		<!--List View-->
+			<ListView x:Name="lvFoodSpecials" Margin="0,5,0,0" RowHeight="-1" HasUnevenRows="true" >
+				<!--Group Header-->
+				<ListView.GroupHeaderTemplate>
+					<DataTemplate>
+						<ViewCell>
+							<StackLayout
+									BackgroundColor="#AB3033" Padding="0" HorizontalOptions="FillAndExpand">
+<!--								BackgroundColor="{x:Static c:Constants.YelpRed}"-->
+								<Label Text="{Binding Key}" TextColor="White" VerticalOptions="CenterAndExpand" FontSize="Small" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" HorizontalOptions="Center"></Label>
+							</StackLayout>
+						</ViewCell>
+					</DataTemplate>
+				</ListView.GroupHeaderTemplate>
+				<!--List Item-->
+				<ListView.ItemTemplate>
+					<DataTemplate>
+					<TextCell Text="{Binding Title}" Detail="{Binding Hours}" TextColor="Black" DetailColor="Gray"></TextCell>
+<!--						<ViewCell>
+							<ViewCell.ContextActions>
+									<MenuItem Clicked="Edit" CommandParameter="{Binding .}" Text="Edit"></MenuItem>
+									<MenuItem x:Name="btnDelete" Clicked="Delete" Text="Delete" IsDestructive="true"></MenuItem>
+							</ViewCell.ContextActions>
+							<StackLayout>
+								<Label Text="{Binding Title}" Margin="10" TextColor="Black" FontSize="Medium" ></Label>
+							</StackLayout>
+						</ViewCell>-->
+					</DataTemplate>	
+				</ListView.ItemTemplate>
+			</ListView>
+		</StackLayout>
+</ContentPage>
+

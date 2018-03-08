@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="FoodSpecs.AddEditFoodSpec">
+	<StackLayout>
+
+		<!--Custom Toolbar FTW-->
+		<Grid>
+			<!--Definitions-->
+			<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"></RowDefinition>
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"></ColumnDefinition>
+				<ColumnDefinition Width="*"></ColumnDefinition>
+				<ColumnDefinition Width="Auto"></ColumnDefinition>
+			</Grid.ColumnDefinitions>
+
+			<!--Content-->
+			<BoxView Grid.Row="0" Grid.ColumnSpan="3" BackgroundColor="#AB3033"></BoxView>
+			<Label x:Name="lblCancel" Text="Cancel" FontSize="Medium" TextColor="White" VerticalTextAlignment="Center" Grid.Row="0" Grid.Column="0">
+				<Label.Margin>
+					<OnPlatform x:TypeArguments="Thickness" iOS="10,25,10,10" Android="10,10,10,10"/>
+				</Label.Margin>
+				<Label.Font>
+					<OnPlatform x:TypeArguments="Font" Android="Large"/>
+				</Label.Font>
+			</Label>
+			<Label x:Name = "lblTitle" Text="" TextColor="White" FontSize="Medium" FontAttributes="Bold" VerticalTextAlignment="Center" HorizontalOptions="CenterAndExpand" Grid.Row="0" Grid.Column="1">
+				<Label.Margin>
+					<OnPlatform x:TypeArguments="Thickness" iOS="0,25,0,10" Android="0,10,0,10" />
+				</Label.Margin>
+				<Label.Font>
+					<OnPlatform x:TypeArguments="Font" Android="Large"/>
+				</Label.Font>
+			</Label>
+			<Label x:Name="lblSave" Text="Save" FontSize="Medium" TextColor="White" VerticalTextAlignment="Center" Grid.Row="0" Grid.Column="2">
+				<Label.Margin>
+					<OnPlatform x:TypeArguments="Thickness" iOS="10,25,10,10" Android="10,10,10,10"/>
+				</Label.Margin>
+				<Label.Font>
+					<OnPlatform x:TypeArguments="Font" Android="Large"/>
+				</Label.Font>
+			</Label>
+		</Grid>
+		<!--End Toolbar-->
+
+	<!--Form-->
+		<ScrollView>
+			<StackLayout Padding="10,15,0,10" x:Name="EditableView">
+
+				<Label Text="Title" FontAttributes="Bold" Margin="0, 5, 0, 0" ></Label>
+				<Entry x:Name="txtTitle"></Entry>
+				<Label Text="Description (optional)" FontAttributes="Bold" Margin="0, 5, 0, 0"></Label>
+				<Editor x:Name="txtDescription" HeightRequest="60"></Editor>
+				<!--Sunday-->
+				<StackLayout Orientation="Horizontal">
+				<Label Text="Sunday" FontAttributes="Bold" Margin="0, 5, 0, 0" WidthRequest="110"></Label><Switch x:Name="swSunday"></Switch>
+				</StackLayout>
+				<!--Monday-->
+				<StackLayout Orientation="Horizontal">
+				<Label Text="Monday" FontAttributes="Bold" Margin="0, 5, 0, 0" WidthRequest="110"></Label><Switch x:Name="swMonday"></Switch>
+				</StackLayout>
+				<!--Tuesday-->
+				<StackLayout Orientation="Horizontal">
+				<Label Text="Tuesday" FontAttributes="Bold" Margin="0, 5, 0, 0" WidthRequest="110"></Label><Switch x:Name="swTuesday"></Switch>
+				</StackLayout>
+				<!--Wednesday-->
+				<StackLayout Orientation="Horizontal">
+				<Label Text="Wednesday" FontAttributes="Bold" Margin="0, 5, 0, 0" WidthRequest="110"></Label><Switch x:Name="swWednesday"></Switch>
+				</StackLayout>
+				<!--Thursday-->
+				<StackLayout Orientation="Horizontal">
+				<Label Text="Thursday" FontAttributes="Bold" Margin="0, 5, 0, 0" WidthRequest="110"></Label><Switch x:Name="swThursday"></Switch>
+				</StackLayout>
+				<!--Friday-->
+				<StackLayout Orientation="Horizontal">
+				<Label Text="Friday" FontAttributes="Bold" Margin="0, 5, 0, 0" WidthRequest="110"></Label><Switch x:Name="swFriday"></Switch>
+				</StackLayout>
+				<!--Saturday-->
+				<StackLayout Orientation="Horizontal">
+				<Label Text="Saturday" FontAttributes="Bold" Margin="0, 5, 0, 0" WidthRequest="110"></Label><Switch x:Name="swSaturday"></Switch>
+				</StackLayout>
+				<!--Time Controls-->
+				<StackLayout x:Name="TimeControls">
+					<StackLayout Orientation="Horizontal">
+						<Label Text="Start Time" YAlign="Center" FontAttributes="Bold" WidthRequest="100"></Label>
+						<TimePicker x:Name="tpStartTime" TextColor="Black"></TimePicker>
+					</StackLayout>
+					<StackLayout Orientation="Horizontal">
+						<Label Text="End Time" YAlign="Center" FontAttributes="Bold" WidthRequest="100"></Label>
+						<TimePicker x:Name="tpEndTime"></TimePicker>
+					</StackLayout>
+				</StackLayout>
+				<!--AllDay-->
+				<StackLayout Orientation="Horizontal">
+					<Label Text="All-Day" FontAttributes="Bold" Margin="0, 5, 0, 0" WidthRequest="110"></Label><Switch x:Name="swAllDay"></Switch>
+				</StackLayout>
+			</StackLayout>
+		</ScrollView>
+	</StackLayout>
+</ContentPage>
