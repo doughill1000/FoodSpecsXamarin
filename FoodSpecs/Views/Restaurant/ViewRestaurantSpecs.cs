@@ -49,12 +49,6 @@ namespace FoodSpecs
 		}
 
 		async Task PopulateList(Restaurant restaurant){
-			//IRestaurantService _restuarantService = Startup.Container.Get<IRestaurantService>();
-			//IFoodSpecialService _foodSpecService = Startup.Container.Get<IFoodSpecialService>();
-
-			//var foodSpecials = await _foodSpecService.GetFoodSpecialsForRestaurant(restaurant.Id);
-			//_foodSpecials = foodSpecials.ToList();
-
 			var specs = await FoodSpecialService.GetSpecsFromStorageAsync();
 			var foodSpecialsFlat = GetFlattenedFoodSpecials(specs.Where(x => x.RestaurantId == restaurant.Id));
 

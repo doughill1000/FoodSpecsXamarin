@@ -38,12 +38,6 @@ namespace FoodSpecs.PCL
 		//<inheritdoc>
 		public async Task<IEnumerable<Restaurant>> SearchRestaurantsByCoordinates(string term = "")
 		{
-			//Check for cached restaurants
-			//var storedRestaurantsJson = CrossSecureStorage.Current.GetValue(LSConstants.Restaurants);
-			//if(storedRestaurantsJson != null){
-			//	return JsonConvert.DeserializeObject<IEnumerable<Restaurant>>(storedRestaurantsJson);
-			//}
-
 			//Get coordinate, will check for cached if there
 			var coordinates = await Utils.GetLatAndLong().ConfigureAwait(false);
 
@@ -71,38 +65,7 @@ namespace FoodSpecs.PCL
 				return restaurants;
 			}
 			return null;
-		}
-
-		////<inheritdoc>
-		//public async Task<IEnumerable<Restaurant>> SearchRestaurantsByCoordinates()
-		//{
-		//	var coordinates = await Utils.GetLatAndLong();
-		//	var restaurants = new List<Restaurant>();
-		//	var offset = 0; //Testing
-
-		//	//yelp api only allows up to 1000 results
-		//	while (offset < 1)//Testing
-		//	{
-		//		var result = await _yelpClient.SearchAsync(new
-		//		{
-		//			term = "restaurant",
-		//			latitude = coordinates["Latitude"],
-		//			longitude = coordinates["Longitude"],
-		//			limit = "50",
-		//			offset = (offset * 50).ToString(),
-		//			radius = "40000",
-		//			sort_by = "distance"
-		//		});
-		//		//If no more results are being returned, break loop
-		//		if(result.Restaurants.Count == 0){
-		//			break;
-		//		}
-		//		restaurants.AddRange(result.Restaurants);
-		//		offset++;
-		//	}
-
-		//	return restaurants;
-		//}
+		}		
 
 		//<inheritdoc>
 		public async Task<IEnumerable<Restaurant>> GetRestaurantsByLocationAndTerm(string term, string location)
@@ -158,22 +121,21 @@ namespace FoodSpecs.PCL
 			return result.Restaurants;
 		}
 
-		////<inheritdoc>
-		//public IEnumerable<Restaurant> GetRestaurantsFromLocalStorage(){
-		//	var jsonString = CrossSecureStorage.Current.GetValue("jsonRestaurants");
-		//	return string.Empty;
+        public static async Task<List<Restaurant>> GetRestaurantsFromStorageAsync()
+        {
+            return JsonConvert.DeserializeObject<List<Restaurant>>(await Utils.GetValueLocalStorageAsync(LSConstants.Restaurants).ConfigureAwait(false));
+        }
 
-		//}
-		#endregion
+        #endregion
 
-		#region Private Methods
+        #region Private Methods
 
-		/// <summary>
-		/// Gets the restaurants
-		/// </summary>
-		/// <returns>The restaurants</returns>
-		/// <param name="url">The url endpoint</param>
-		async Task<IEnumerable<Restaurant>> GetRestaurants(string url)
+        /// <summary>
+        /// Gets the restaurants
+        /// </summary>
+        /// <returns>The restaurants</returns>
+        /// <param name="url">The url endpoint</param>
+        async Task<IEnumerable<Restaurant>> GetRestaurants(string url)
 		{
 			var response = await _restService.GetAsync(url);
 			if(response.IsSuccessStatusCode){
@@ -204,15 +166,11 @@ namespace FoodSpecs.PCL
 		/// <returns>The restaurant URL.</returns>
 		/// <param name="endpoint">Api endpoint</param>
 		/// <param name="parameters">Dictionary of parameters</param>
-		string FormatRestaurantUrl(string endpoint, Dictionary<string, string> parameters){
+		private string FormatRestaurantUrl(string endpoint, Dictionary<string, string> parameters){
 			
 			return Utils.FormatUrl(Constants.RestaurantApiBaseUrl + endpoint, parameters);
 		}
 
-		public static async Task<List<Restaurant>> GetRestaurantsFromStorageAsync()
-		{
-			return JsonConvert.DeserializeObject<List<Restaurant>>(await Utils.GetValueLocalStorageAsync(LSConstants.Restaurants).ConfigureAwait(false));
-		}
 		#endregion
 	}
 }

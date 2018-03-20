@@ -38,6 +38,7 @@ Thumbs.db
 
 # dotCover
 *.dotCover
-LocalFoodSpecials_PCL/Services/RestService.cs
 LocalFoodSpecials_PCL/Constants.cs
 iOS/Info.plist
+/.vs/FoodSpecs/v15/Server/sqlite3
+/UpgradeLog.htm

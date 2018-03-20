@@ -98,36 +98,30 @@ namespace FoodSpecs.PCL
 
 			var restaurants = await _restaurantService.SearchRestaurantsByCoordinates();
 			return await GetSpecsFromStorageAsync();
-			//var foodSpecs = restaurants.SelectMany(x => x.FoodSpecials);
-			//foreach(var spec in foodSpecs){
-			//	spec.Restaurant = restaurants.Single(x => x.Id == spec.RestaurantId);
-			//}
-			//CrossSecureStorage.Current.SetValue(LSConstants.Specs, JsonConvert.SerializeObject(foodSpecs));
-
-			//return foodSpecs; 
 		}
-		#endregion
+        public static async Task<List<FoodSpecial>> GetSpecsFromStorageAsync()
+        {
+            return JsonConvert.DeserializeObject<IEnumerable<FoodSpecial>>(await Utils.GetValueLocalStorageAsync(LSConstants.Specs)).ToList();
+        }
+        #endregion
 
-		#region Private Methods
-		/// <summary>
-		/// Formats the food special URL.
-		/// </summary>
-		/// <returns>The food special URL.</returns>
-		/// <param name="endpoint">Api endpoint</param>
-		/// <param name="parameters">Dictionary of parameters</param>
-		string FormatFoodSpecialsUrl(string endpoint, Dictionary<string, string> parameters)
+        #region Private Methods
+        /// <summary>
+        /// Formats the food special URL.
+        /// </summary>
+        /// <returns>The food special URL.</returns>
+        /// <param name="endpoint">Api endpoint</param>
+        /// <param name="parameters">Dictionary of parameters</param>
+        private string FormatFoodSpecialsUrl(string endpoint, Dictionary<string, string> parameters)
 		{
 			return Utils.FormatUrl(Constants.FoodSpecialsApiBaseUrl + endpoint, parameters);
 		}
 
-		public static async Task<List<FoodSpecial>> GetSpecsFromStorageAsync(){
-			return JsonConvert.DeserializeObject<IEnumerable<FoodSpecial>>(await Utils.GetValueLocalStorageAsync(LSConstants.Specs)).ToList();
-		}
-
-		public static void SetSpecsInStorage(List<FoodSpecial> specs){
-			CrossSecureStorage.Current.SetValue(LSConstants.Specs, JsonConvert.SerializeObject(specs));
-		}
-		#endregion
-	}
+        private static void SetSpecsInStorage(List<FoodSpecial> specs)
+        {
+            CrossSecureStorage.Current.SetValue(LSConstants.Specs, JsonConvert.SerializeObject(specs));
+        }
+        #endregion
+    }
 }
 
