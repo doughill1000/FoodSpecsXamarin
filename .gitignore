@@ -42,3 +42,4 @@ LocalFoodSpecials_PCL/Constants.cs
 iOS/Info.plist
 /.vs/FoodSpecs/v15/Server/sqlite3
 /UpgradeLog.htm
+/.vs/config/applicationhost.config
